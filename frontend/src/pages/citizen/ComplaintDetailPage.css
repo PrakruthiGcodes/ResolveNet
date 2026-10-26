@@ -1,0 +1,84 @@
+.rn-detail-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--rn-space-2);
+  margin-bottom: var(--rn-space-5);
+}
+
+.rn-detail-grid {
+  display: grid;
+  grid-template-columns: 1.7fr 1fr;
+  gap: var(--rn-space-5);
+  align-items: start;
+}
+
+.rn-detail-grid__main,
+.rn-detail-grid__side {
+  display: flex;
+  flex-direction: column;
+  gap: var(--rn-space-4);
+}
+
+.rn-detail-description {
+  color: var(--rn-color-ink-800);
+  line-height: var(--rn-line-height-relaxed);
+  margin-bottom: var(--rn-space-4);
+  white-space: pre-wrap;
+}
+
+.rn-detail-image {
+  margin-bottom: var(--rn-space-4);
+}
+
+.rn-detail-image img {
+  max-height: 320px;
+  width: 100%;
+  object-fit: cover;
+  border-radius: var(--rn-radius-md);
+  border: 1px solid var(--rn-color-border);
+}
+
+.rn-detail-classification {
+  display: flex;
+  flex-direction: column;
+  gap: var(--rn-space-3);
+  margin: 0;
+  padding-top: var(--rn-space-4);
+  border-top: 1px solid var(--rn-color-border);
+}
+
+.rn-detail-classification dt {
+  font-size: var(--rn-font-size-xs);
+  font-weight: var(--rn-font-weight-semibold);
+  color: var(--rn-color-ink-500);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--rn-space-1);
+}
+
+.rn-detail-classification dd {
+  margin: 0;
+  font-size: var(--rn-font-size-sm);
+  color: var(--rn-color-ink-900);
+}
+
+.rn-detail-classification__confidence {
+  color: var(--rn-color-ink-500);
+  font-weight: var(--rn-font-weight-regular);
+}
+
+/* Shared by both the citizen and authority complaint detail pages (each
+   imports this file) - a small note line under the SLA/Escalation
+   indicators, e.g. the exact deadline or the escalation history sentence. */
+.rn-detail-side-note {
+  margin-top: var(--rn-space-3);
+  font-size: var(--rn-font-size-sm);
+  color: var(--rn-color-ink-500);
+  line-height: var(--rn-line-height-relaxed);
+}
+
+@media (max-width: 900px) {
+  .rn-detail-grid {
+    grid-template-columns: 1fr;
+  }
+}

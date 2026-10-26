@@ -1,0 +1,159 @@
+.rn-filter-bar {
+  display: grid;
+  grid-template-columns: 2fr repeat(3, 1fr) auto auto;
+  gap: var(--rn-space-4);
+  align-items: end;
+  margin-bottom: var(--rn-space-5);
+}
+
+.rn-filter-bar__checkbox {
+  display: flex;
+  align-items: center;
+  gap: var(--rn-space-2);
+  font-size: var(--rn-font-size-sm);
+  font-weight: var(--rn-font-weight-medium);
+  color: var(--rn-color-ink-700);
+  padding-bottom: 0.625rem;
+  white-space: nowrap;
+}
+
+.rn-table-wrapper {
+  background: var(--rn-color-surface);
+  border: 1px solid var(--rn-color-border);
+  border-radius: var(--rn-radius-lg);
+  overflow: hidden;
+}
+
+.rn-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.rn-table thead {
+  background: var(--rn-color-ink-50);
+}
+
+.rn-table th {
+  text-align: left;
+  padding: var(--rn-space-3) var(--rn-space-4);
+  font-size: var(--rn-font-size-xs);
+  font-weight: var(--rn-font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--rn-color-ink-500);
+  border-bottom: 1px solid var(--rn-color-border);
+}
+
+.rn-table td {
+  padding: var(--rn-space-3) var(--rn-space-4);
+  border-bottom: 1px solid var(--rn-color-border);
+  font-size: var(--rn-font-size-sm);
+  color: var(--rn-color-ink-800);
+  vertical-align: middle;
+}
+
+.rn-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.rn-table tbody tr:hover {
+  background: var(--rn-color-ink-50);
+}
+
+.rn-table__ref {
+  display: block;
+  font-size: var(--rn-font-size-xs);
+  font-weight: var(--rn-font-weight-semibold);
+  color: var(--rn-color-ink-400);
+}
+
+.rn-table__description {
+  display: block;
+  margin-top: 2px;
+  max-width: 320px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rn-table__action {
+  text-align: right;
+}
+
+.rn-table__link {
+  font-weight: var(--rn-font-weight-semibold);
+  color: var(--rn-color-primary-700);
+}
+
+/* Responsive table -> stacked cards. Same markup, no duplicated render
+   logic: each <td> becomes a labeled row using its data-label attribute. */
+@media (max-width: 900px) {
+  .rn-filter-bar {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .rn-filter-bar {
+    grid-template-columns: 1fr;
+  }
+
+  .rn-table thead {
+    display: none;
+  }
+
+  .rn-table,
+  .rn-table tbody,
+  .rn-table tr,
+  .rn-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .rn-table tr {
+    padding: var(--rn-space-4);
+    border-bottom: 1px solid var(--rn-color-border);
+  }
+
+  .rn-table td {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--rn-space-3);
+    padding: var(--rn-space-2) 0;
+    border-bottom: none;
+  }
+
+  .rn-table td::before {
+    content: attr(data-label);
+    font-size: var(--rn-font-size-xs);
+    font-weight: var(--rn-font-weight-semibold);
+    color: var(--rn-color-ink-500);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    flex-shrink: 0;
+  }
+
+  .rn-table td[data-label='Complaint'] {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--rn-space-1);
+  }
+
+  .rn-table td[data-label='Complaint']::before {
+    display: none;
+  }
+
+  .rn-table__description {
+    max-width: 100%;
+    white-space: normal;
+  }
+
+  .rn-table__action {
+    justify-content: flex-end;
+  }
+
+  .rn-table__action::before {
+    display: none;
+  }
+}

@@ -1,0 +1,61 @@
+.rn-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--rn-space-3);
+  padding: var(--rn-space-7) var(--rn-space-5);
+  color: var(--rn-color-ink-600);
+}
+
+.rn-state--full-page {
+  min-height: 60vh;
+  justify-content: center;
+}
+
+.rn-state--empty,
+.rn-state--error {
+  background: var(--rn-color-surface);
+  border: 1px dashed var(--rn-color-border-strong);
+  border-radius: var(--rn-radius-lg);
+}
+
+.rn-state__icon {
+  font-size: 1.75rem;
+  color: var(--rn-color-ink-400);
+}
+
+.rn-state--error .rn-state__icon {
+  color: var(--rn-color-warning-600);
+}
+
+.rn-state__title {
+  font-size: var(--rn-font-size-md);
+  font-weight: var(--rn-font-weight-semibold);
+  color: var(--rn-color-ink-800);
+}
+
+.rn-state__text {
+  max-width: 32ch;
+  font-size: var(--rn-font-size-sm);
+  color: var(--rn-color-ink-500);
+}
+
+.rn-state__action {
+  margin-top: var(--rn-space-2);
+}
+
+.rn-state__spinner {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 3px solid var(--rn-color-primary-100);
+  border-top-color: var(--rn-color-primary-700);
+  animation: rn-spin 0.7s linear infinite;
+}
+
+@keyframes rn-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

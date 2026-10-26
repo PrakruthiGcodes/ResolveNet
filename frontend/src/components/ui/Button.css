@@ -1,0 +1,111 @@
+.rn-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--rn-space-2);
+  font-weight: var(--rn-font-weight-semibold);
+  border-radius: var(--rn-radius-md);
+  border: 1px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background-color var(--rn-transition-fast),
+    border-color var(--rn-transition-fast),
+    color var(--rn-transition-fast),
+    box-shadow var(--rn-transition-fast);
+  text-decoration: none;
+}
+
+.rn-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Sizes */
+.rn-button--sm {
+  padding: 0.375rem 0.75rem;
+  font-size: var(--rn-font-size-sm);
+}
+
+.rn-button--md {
+  padding: 0.625rem 1.125rem;
+  font-size: var(--rn-font-size-base);
+}
+
+.rn-button--lg {
+  padding: 0.8125rem 1.5rem;
+  font-size: var(--rn-font-size-md);
+}
+
+.rn-button--full {
+  width: 100%;
+}
+
+/* Variants */
+.rn-button--primary {
+  background: var(--rn-color-primary-800);
+  color: #fff;
+}
+
+.rn-button--primary:hover:not(:disabled) {
+  background: var(--rn-color-primary-900);
+}
+
+.rn-button--secondary {
+  background: var(--rn-color-primary-50);
+  color: var(--rn-color-primary-800);
+  border-color: var(--rn-color-primary-100);
+}
+
+.rn-button--secondary:hover:not(:disabled) {
+  background: var(--rn-color-primary-100);
+}
+
+.rn-button--outline {
+  background: transparent;
+  color: var(--rn-color-ink-800);
+  border-color: var(--rn-color-border-strong);
+}
+
+.rn-button--outline:hover:not(:disabled) {
+  background: var(--rn-color-ink-50);
+  border-color: var(--rn-color-ink-300);
+}
+
+.rn-button--ghost {
+  background: transparent;
+  color: var(--rn-color-ink-700);
+}
+
+.rn-button--ghost:hover:not(:disabled) {
+  background: var(--rn-color-ink-100);
+}
+
+.rn-button--danger {
+  background: var(--rn-color-danger-600);
+  color: #fff;
+}
+
+.rn-button--danger:hover:not(:disabled) {
+  background: var(--rn-color-danger-700);
+}
+
+.rn-button__spinner {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  animation: rn-spin 0.6s linear infinite;
+  flex-shrink: 0;
+}
+
+.rn-button__label--loading {
+  opacity: 0.85;
+}
+
+@keyframes rn-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -1,0 +1,18 @@
+__pycache__/
+*.pyc
+.venv/
+
+# model/ previously ignored everything including best.pt itself - the
+# trained weights need to be committed (see Step 6 deployment audit), so
+# only non-model clutter is ignored here now, with best.pt explicitly
+# allowed through.
+model/*
+!model/.gitkeep
+!model/best.pt
+# The runtime image classifier the backend loads (see backend/services/teachableMachineClassifier.js).
+!model/teachable_machine/
+
+# Pretrained base checkpoint used only as a training starting point
+# (see train.py --model default) - not loaded by the app at runtime,
+# regenerable via `pip install ultralytics` auto-download.
+yolov8n.pt

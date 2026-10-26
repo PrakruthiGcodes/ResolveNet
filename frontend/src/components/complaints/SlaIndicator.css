@@ -1,0 +1,32 @@
+.rn-sla {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--rn-space-1);
+  font-size: var(--rn-font-size-sm);
+  font-weight: var(--rn-font-weight-medium);
+}
+
+.rn-sla--overdue {
+  color: var(--rn-color-danger-600);
+  font-weight: var(--rn-font-weight-semibold);
+}
+
+.rn-sla--overdue::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--rn-color-danger-600);
+}
+
+.rn-sla--upcoming {
+  color: var(--rn-color-ink-700);
+}
+
+.rn-sla--resolved {
+  color: var(--rn-color-ink-500);
+}
+
+.rn-sla--neutral {
+  color: var(--rn-color-ink-400);
+}

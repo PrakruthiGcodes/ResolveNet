@@ -1,0 +1,14 @@
+# Colab-side dataset config for Civic-issues-v2 (ResolveNet v1 + supplemental
+# water-leak data merged, water-leak class remapped to index 4).
+#
+# This is a NEW file - it does not touch ai-engine/data.yaml (the v1 local
+# config) or either source dataset's own data.yaml. Upload this file to Colab
+# as /content/data.yaml (or /content/data_v2.yaml) after uploading/unzipping
+# the Civic-issues-v2 dataset to /content/dataset/Civic-issues-v2/.
+
+train: /content/dataset/Civic-issues-v2/train/images
+val: /content/dataset/Civic-issues-v2/valid/images
+test: /content/dataset/Civic-issues-v2/test/images
+
+nc: 5
+names: ['fallen_tree', 'garbage', 'pothole', 'streetlight', 'water_leak']

@@ -1,0 +1,121 @@
+/*
+  ResolveNet design tokens.
+  A restrained civic/public-service palette: deep navy for trust and
+  authority, a muted ochre accent used sparingly, and clear semantic
+  colors for status communication. Every component reads from these
+  variables rather than hard-coding values.
+*/
+
+:root {
+  color-scheme: light;
+
+  /* ---- Brand ---- */
+  --rn-color-primary-900: #0b2545;
+  --rn-color-primary-800: #123863;
+  --rn-color-primary-700: #1b4b7a;
+  --rn-color-primary-600: #245d93;
+  --rn-color-primary-500: #2f6fac;
+  --rn-color-primary-100: #dce8f4;
+  --rn-color-primary-50: #eef4fa;
+
+  --rn-color-accent-700: #8a4a10;
+  --rn-color-accent-600: #b45309;
+  --rn-color-accent-500: #c2761c;
+  --rn-color-accent-100: #fbe8d2;
+  --rn-color-accent-50: #fdf1e3;
+
+  /* ---- Neutrals ---- */
+  --rn-color-ink-900: #12161c;
+  --rn-color-ink-800: #1f2530;
+  --rn-color-ink-700: #333c49;
+  --rn-color-ink-500: #5b6675;
+  --rn-color-ink-400: #7c8794;
+  --rn-color-ink-300: #a4adb8;
+  --rn-color-ink-200: #d3d9e0;
+  --rn-color-ink-100: #e7eaee;
+  --rn-color-ink-50: #f3f5f7;
+
+  --rn-color-surface: #ffffff;
+  --rn-color-bg: #f5f7fa;
+  --rn-color-border: #dde2e8;
+  --rn-color-border-strong: #c3cad3;
+
+  /* ---- Semantic status colors ---- */
+  --rn-color-success-700: #14532d;
+  --rn-color-success-600: #1e7a46;
+  --rn-color-success-bg: #e6f4ec;
+  --rn-color-success-border: #b7ddc5;
+
+  --rn-color-warning-700: #7c3a0a;
+  --rn-color-warning-600: #b45309;
+  --rn-color-warning-bg: #fdf1e3;
+  --rn-color-warning-border: #f0cd9d;
+
+  --rn-color-danger-700: #7f1d1a;
+  --rn-color-danger-600: #b3261e;
+  --rn-color-danger-bg: #fcebea;
+  --rn-color-danger-border: #eec2bf;
+
+  --rn-color-info-700: #123863;
+  --rn-color-info-600: #1b4b7a;
+  --rn-color-info-bg: #eaf1f8;
+  --rn-color-info-border: #c4d7ea;
+
+  --rn-color-neutral-bg: #eef0f2;
+  --rn-color-neutral-border: #d7dbe0;
+  --rn-color-neutral-text: #3c4450;
+
+  /* ---- Typography ---- */
+  --rn-font-sans:
+    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+    Arial, sans-serif;
+
+  --rn-font-size-xs: 0.75rem;
+  --rn-font-size-sm: 0.8125rem;
+  --rn-font-size-base: 0.9375rem;
+  --rn-font-size-md: 1.0625rem;
+  --rn-font-size-lg: 1.25rem;
+  --rn-font-size-xl: 1.5rem;
+  --rn-font-size-2xl: 1.875rem;
+  --rn-font-size-3xl: 2.5rem;
+
+  --rn-line-height-tight: 1.2;
+  --rn-line-height-normal: 1.5;
+  --rn-line-height-relaxed: 1.7;
+
+  --rn-font-weight-regular: 400;
+  --rn-font-weight-medium: 500;
+  --rn-font-weight-semibold: 600;
+  --rn-font-weight-bold: 700;
+
+  /* ---- Spacing scale ---- */
+  --rn-space-1: 0.25rem;
+  --rn-space-2: 0.5rem;
+  --rn-space-3: 0.75rem;
+  --rn-space-4: 1rem;
+  --rn-space-5: 1.5rem;
+  --rn-space-6: 2rem;
+  --rn-space-7: 3rem;
+  --rn-space-8: 4rem;
+  --rn-space-9: 6rem;
+
+  /* ---- Radius ---- */
+  --rn-radius-sm: 6px;
+  --rn-radius-md: 10px;
+  --rn-radius-lg: 16px;
+  --rn-radius-pill: 999px;
+
+  /* ---- Shadow ---- */
+  --rn-shadow-sm: 0 1px 2px rgba(11, 37, 69, 0.06);
+  --rn-shadow-md: 0 6px 16px rgba(11, 37, 69, 0.08);
+  --rn-shadow-lg: 0 16px 32px rgba(11, 37, 69, 0.12);
+  --rn-shadow-focus: 0 0 0 3px rgba(47, 111, 172, 0.35);
+
+  /* ---- Motion ---- */
+  --rn-transition-fast: 120ms ease;
+  --rn-transition-base: 180ms ease;
+
+  /* ---- Layout ---- */
+  --rn-container-width: 1120px;
+  --rn-header-height: 68px;
+}

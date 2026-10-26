@@ -1,0 +1,102 @@
+.rn-notification-bell {
+  position: relative;
+}
+
+.rn-notification-bell__trigger {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  color: var(--rn-color-ink-600);
+  transition: background-color var(--rn-transition-fast), color var(--rn-transition-fast);
+}
+
+.rn-notification-bell__trigger:hover {
+  background: var(--rn-color-ink-100);
+  color: var(--rn-color-ink-900);
+}
+
+.rn-notification-bell__badge {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 3px;
+  border-radius: var(--rn-radius-pill);
+  background: var(--rn-color-danger-600);
+  color: #fff;
+  font-size: 10px;
+  font-weight: var(--rn-font-weight-bold);
+  line-height: 16px;
+  text-align: center;
+  border: 2px solid var(--rn-color-surface);
+}
+
+.rn-notification-panel {
+  position: absolute;
+  top: calc(100% + var(--rn-space-2));
+  right: 0;
+  width: 360px;
+  max-width: calc(100vw - var(--rn-space-6));
+  background: var(--rn-color-surface);
+  border: 1px solid var(--rn-color-border);
+  border-radius: var(--rn-radius-lg);
+  box-shadow: var(--rn-shadow-lg);
+  z-index: 60;
+  overflow: hidden;
+}
+
+.rn-notification-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--rn-space-3);
+  padding: var(--rn-space-3) var(--rn-space-4);
+  border-bottom: 1px solid var(--rn-color-border);
+  font-size: var(--rn-font-size-sm);
+  font-weight: var(--rn-font-weight-semibold);
+  color: var(--rn-color-ink-900);
+}
+
+.rn-notification-panel__mark-all {
+  background: transparent;
+  border: none;
+  color: var(--rn-color-primary-700);
+  font-size: var(--rn-font-size-xs);
+  font-weight: var(--rn-font-weight-semibold);
+}
+
+.rn-notification-panel__mark-all:hover {
+  text-decoration: underline;
+}
+
+.rn-notification-panel__body {
+  max-height: 360px;
+  overflow-y: auto;
+}
+
+.rn-notification-panel__body .rn-state {
+  padding: var(--rn-space-6) var(--rn-space-4);
+}
+
+.rn-notification-list {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 480px) {
+  .rn-notification-panel {
+    position: fixed;
+    top: var(--rn-header-height);
+    right: var(--rn-space-3);
+    left: var(--rn-space-3);
+    width: auto;
+    max-width: none;
+  }
+}

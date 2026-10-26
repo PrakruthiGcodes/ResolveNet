@@ -1,0 +1,5 @@
+.rn-complaint-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--rn-space-3);
+}

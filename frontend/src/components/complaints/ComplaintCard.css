@@ -1,0 +1,53 @@
+.rn-complaint-card {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  transition: border-color var(--rn-transition-fast), box-shadow var(--rn-transition-fast);
+}
+
+.rn-complaint-card:hover {
+  border-color: var(--rn-color-primary-500);
+  box-shadow: var(--rn-shadow-md);
+  text-decoration: none;
+}
+
+.rn-complaint-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--rn-space-3);
+  margin-bottom: var(--rn-space-3);
+}
+
+.rn-complaint-card__badges {
+  display: flex;
+  gap: var(--rn-space-2);
+  flex-wrap: wrap;
+}
+
+.rn-complaint-card__id {
+  font-size: var(--rn-font-size-xs);
+  color: var(--rn-color-ink-400);
+  font-weight: var(--rn-font-weight-semibold);
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+}
+
+.rn-complaint-card__description {
+  color: var(--rn-color-ink-800);
+  font-size: var(--rn-font-size-base);
+  line-height: var(--rn-line-height-normal);
+  margin-bottom: var(--rn-space-3);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.rn-complaint-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--rn-space-2);
+  font-size: var(--rn-font-size-xs);
+  color: var(--rn-color-ink-500);
+}

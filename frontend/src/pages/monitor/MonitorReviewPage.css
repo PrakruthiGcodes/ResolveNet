@@ -1,0 +1,16 @@
+.rn-monitor-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--rn-space-4);
+}
+
+.rn-monitor-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--rn-space-3);
+  margin-top: var(--rn-space-4);
+}
+
+.rn-monitor-card__reject {
+  margin-top: var(--rn-space-4);
+}

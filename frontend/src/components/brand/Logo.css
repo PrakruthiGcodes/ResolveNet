@@ -1,0 +1,36 @@
+.rn-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--rn-space-2);
+  color: var(--rn-color-ink-900);
+}
+
+.rn-logo__mark {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.rn-logo--sm .rn-logo__mark {
+  width: 26px;
+  height: 26px;
+}
+
+.rn-logo--lg .rn-logo__mark {
+  width: 40px;
+  height: 40px;
+}
+
+.rn-logo__wordmark {
+  font-weight: var(--rn-font-weight-bold);
+  font-size: var(--rn-font-size-lg);
+  letter-spacing: -0.01em;
+}
+
+.rn-logo--sm .rn-logo__wordmark {
+  font-size: var(--rn-font-size-md);
+}
+
+.rn-logo--lg .rn-logo__wordmark {
+  font-size: var(--rn-font-size-xl);
+}

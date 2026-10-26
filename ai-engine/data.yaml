@@ -1,0 +1,25 @@
+# Training-time dataset config for ResolveNet YOLOv8 civic-issue detector.
+#
+# This file is NOT part of the original Roboflow export. The original
+# dataset/Civic-issues.v1i.yolov8/data.yaml declares relative paths
+# ("../train/images") that assume data.yaml sits at the dataset root next
+# to train/valid/test. In this extraction, train/valid/test actually live
+# INSIDE the Civic-issues.v1i.yolov8 folder alongside data.yaml, so those
+# relative paths point to a nonexistent location one level too high.
+#
+# Rather than editing the original (untouched, preserved as downloaded),
+# this file mirrors it with corrected paths for local training.
+# Classes and their order/IDs are copied verbatim - unchanged, unrenamed.
+#
+# The paths below are relative to this file's folder (ai-engine/), so the file
+# works on any machine. train.py passes this file by its absolute path, and
+# Ultralytics resolves relative entries against the folder that holds it.
+# No `path:` key is set on purpose: a relative `path:` would be resolved against
+# Ultralytics' own datasets folder instead.
+
+train: dataset/Civic-issues.v1i.yolov8/train/images
+val: dataset/Civic-issues.v1i.yolov8/valid/images
+test: dataset/Civic-issues.v1i.yolov8/test/images
+
+nc: 5
+names: ['fallen_tree', 'garbage', 'pothole', 'streetlight', 'water_leak']

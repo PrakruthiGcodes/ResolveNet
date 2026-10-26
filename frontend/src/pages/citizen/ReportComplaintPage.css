@@ -1,0 +1,151 @@
+.rn-report-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--rn-space-5);
+  max-width: 640px;
+}
+
+.rn-report-form__upload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--rn-space-1);
+  padding: var(--rn-space-6) var(--rn-space-4);
+  border: 1px dashed var(--rn-color-border-strong);
+  border-radius: var(--rn-radius-md);
+  background: var(--rn-color-ink-50);
+  color: var(--rn-color-ink-600);
+  font-size: var(--rn-font-size-sm);
+  font-weight: var(--rn-font-weight-medium);
+  cursor: pointer;
+  text-align: center;
+  transition: border-color var(--rn-transition-fast), background-color var(--rn-transition-fast);
+}
+
+.rn-report-form__upload:hover {
+  border-color: var(--rn-color-primary-500);
+  background: var(--rn-color-primary-50);
+}
+
+.rn-report-form__upload-hint {
+  font-size: var(--rn-font-size-xs);
+  font-weight: var(--rn-font-weight-regular);
+  color: var(--rn-color-ink-400);
+}
+
+.rn-report-form__preview {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--rn-space-3);
+}
+
+.rn-report-form__preview img {
+  max-width: 100%;
+  max-height: 260px;
+  border-radius: var(--rn-radius-md);
+  border: 1px solid var(--rn-color-border);
+  object-fit: cover;
+}
+
+.rn-report-form__location-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--rn-space-2);
+  margin-top: var(--rn-space-2);
+}
+
+.rn-report-form__location-status {
+  margin: var(--rn-space-2) 0 0;
+  font-size: var(--rn-font-size-sm);
+  color: var(--rn-color-ink-500);
+}
+
+.rn-location-picker {
+  display: flex;
+  flex-direction: column;
+  gap: var(--rn-space-2);
+  margin-top: var(--rn-space-3);
+}
+
+/* Leaflet needs an explicit height. isolation keeps its panes and controls
+   from stacking above the page header or dropdowns. */
+.rn-location-picker__map {
+  width: 100%;
+  height: 300px;
+  border: 1px solid var(--rn-color-border);
+  border-radius: var(--rn-radius-md);
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--rn-color-ink-50);
+}
+
+@media (max-width: 480px) {
+  .rn-location-picker__map {
+    height: 240px;
+  }
+}
+
+.rn-location-picker__notice {
+  margin: 0;
+  padding: var(--rn-space-2) var(--rn-space-3);
+  border: 1px solid var(--rn-color-warning-border);
+  border-radius: var(--rn-radius-sm);
+  background: var(--rn-color-warning-bg);
+  color: var(--rn-color-warning-700);
+  font-size: var(--rn-font-size-xs);
+}
+
+.rn-report-form__actions {
+  display: flex;
+  gap: var(--rn-space-3);
+}
+
+.rn-report-result {
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--rn-space-4);
+}
+
+.rn-report-result__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--rn-space-3);
+  padding-bottom: var(--rn-space-3);
+  border-bottom: 1px solid var(--rn-color-border);
+  font-size: var(--rn-font-size-sm);
+}
+
+.rn-report-result__label {
+  color: var(--rn-color-ink-500);
+  font-weight: var(--rn-font-weight-medium);
+}
+
+.rn-report-result__ref {
+  font-weight: var(--rn-font-weight-semibold);
+  color: var(--rn-color-ink-900);
+  letter-spacing: 0.02em;
+}
+
+.rn-report-result__confidence {
+  font-size: var(--rn-font-size-xs);
+  color: var(--rn-color-ink-500);
+}
+
+.rn-report-result__image-note {
+  background: var(--rn-color-info-bg);
+  border: 1px solid var(--rn-color-info-border);
+  color: var(--rn-color-info-700);
+  padding: var(--rn-space-3) var(--rn-space-4);
+  border-radius: var(--rn-radius-sm);
+  font-size: var(--rn-font-size-sm);
+}
+
+.rn-report-result__actions {
+  display: flex;
+  gap: var(--rn-space-3);
+  flex-wrap: wrap;
+}
