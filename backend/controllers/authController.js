@@ -56,7 +56,7 @@ const registerUser = async (req, res) => {
   } catch (error) {
     const reason = describeRegistrationError(error);
     console.error(`[auth] Registration failed: ${reason}`);
-    return res.status(500).json({ message: 'Registration failed', error: reason });
+    return res.status(500).json({ message: 'Registration failed' });
   }
 };
 
@@ -94,7 +94,7 @@ const loginUser = async (req, res) => {
     });
   } catch (error) {
     console.error(`[auth] Login failed: ${error.message}`);
-    return res.status(500).json({ message: 'Login failed', error: error.message });
+    return res.status(500).json({ message: 'Login failed' });
   }
 };
 

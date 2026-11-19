@@ -8,8 +8,17 @@ const complaintRoutes = require('./routes/complaintRoutes');
 const notificationRoutes = require('./routes/notificationRoutes');
 const { startEscalationScheduler } = require('./services/escalationScheduler');
 
-connectDB();
-startEscalationScheduler();
+const requiredEnv = ['MONGO_URI', 'JWT_SECRET'];
+for (const key of requiredEnv) {
+  if (!process.env[key]) {
+    console.error(`Missing required environment variable: ${key}`);
+    process.exit(1);
+  }
+}
+if (process.env.JWT_SECRET.startsWith('replace_this')) {
+  console.error('JWT_SECRET is still set to the example placeholder');
+  process.exit(1);
+}
 
 const app = express();
 
@@ -45,6 +54,9 @@ app.use('/api/notifications', notificationRoutes);
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+connectDB().then(() => {
+  startEscalationScheduler();
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
 });

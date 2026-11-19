@@ -14,7 +14,7 @@ This folder holds the image models and training material for ResolveNet. It cont
 
 The backend loads these files in Node.js with TensorFlow.js. The code is in [`backend/services/teachableMachineClassifier.js`](../backend/services/teachableMachineClassifier.js). No Python is needed to run it.
 
-**Input:** one photo per complaint (JPEG, PNG, GIF, or WEBP, up to 5 MB). The image is resized to 224 × 224 and its RGB values are scaled to −1 to 1.
+**Input:** one photo per complaint (JPEG, PNG, or GIF, up to 5 MB). The image is resized to 224 × 224 and its RGB values are scaled to −1 to 1.
 
 **Output classes**, from `metadata.json`:
 

@@ -10,7 +10,6 @@ const ALLOWED_MIME_TYPES = {
   'image/jpeg': '.jpg',
   'image/png': '.png',
   'image/gif': '.gif',
-  'image/webp': '.webp',
 };
 
 if (!fs.existsSync(UPLOAD_DIR)) {
@@ -33,7 +32,7 @@ const storage = multer.diskStorage({
 
 const fileFilter = (req, file, cb) => {
   if (!ALLOWED_MIME_TYPES[file.mimetype]) {
-    return cb(new Error('Only JPEG, PNG, GIF, or WEBP images are allowed'));
+    return cb(new Error('Only JPEG, PNG, or GIF images are allowed'));
   }
   return cb(null, true);
 };
