@@ -8,7 +8,8 @@
  *
  * Uses node:test. Run with: npm test (from backend/).
  */
-
+const fs = require('node:fs/promises');
+const path = require('node:path');
 const { describe, it, beforeEach, afterEach, mock } = require('node:test');
 const assert = require('node:assert/strict');
 
@@ -31,6 +32,27 @@ const mockRes = () => {
   };
   return res;
 };
+
+const testImagePath = path.join(
+  __dirname,
+  '..',
+  'uploads',
+  'upload.jpg'
+);
+
+beforeEach(async () => {
+  await fs.mkdir(path.dirname(testImagePath), {
+    recursive: true,
+  });
+
+  await fs.writeFile(
+    testImagePath,
+    Buffer.from([0xff, 0xd8, 0xff, 0xd9])
+  );
+
+  // Keep your existing mock setup here.
+});
+
 
 const citizen = { id: 'citizen-1', role: 'citizen' };
 
@@ -62,7 +84,7 @@ const modelUnavailable = {
 // A multer-style upload. The path is never read, because classifyImage is stubbed.
 const photoFile = () => ({
   filename: 'upload.jpg',
-  path: 'uploads/upload.jpg',
+  path: testImagePath,
   originalname: 'issue.jpg',
   mimetype: 'image/jpeg',
   size: 1000,

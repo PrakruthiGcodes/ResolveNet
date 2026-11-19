@@ -21,6 +21,81 @@ const {
 
 // A failed or unavailable classifier must never fail the whole submission.
 // The result is reported as unavailable, so the citizen is asked to confirm.
+const removeUploadedFile = (file) => {
+  if (file?.path) {
+    fs.promises.unlink(file.path).catch(() => {});
+  }
+};
+
+
+
+const hasValidImageSignature = async (file) => {
+  if (!file?.path || !file?.mimetype) {
+    return false;
+  }
+
+  let handle;
+
+  try {
+    handle = await fs.promises.open(file.path, 'r');
+
+    const header = Buffer.alloc(12);
+    const { bytesRead } = await handle.read(
+      header,
+      0,
+      header.length,
+      0
+    );
+
+    const bytes = header.subarray(0, bytesRead);
+    const mime = file.mimetype.toLowerCase();
+
+    if (mime === 'image/jpeg') {
+      return (
+        bytes.length >= 3 &&
+        bytes[0] === 0xff &&
+        bytes[1] === 0xd8 &&
+        bytes[2] === 0xff
+      );
+    }
+
+    if (mime === 'image/png') {
+      return (
+        bytes.length >= 8 &&
+        bytes.subarray(0, 8).equals(
+          Buffer.from([
+            0x89, 0x50, 0x4e, 0x47,
+            0x0d, 0x0a, 0x1a, 0x0a
+          ])
+        )
+      );
+    }
+
+    if (mime === 'image/gif') {
+      return (
+        bytes.length >= 6 &&
+        /^GIF8[79]a$/.test(
+          bytes.subarray(0, 6).toString('ascii')
+        )
+      );
+    }
+
+    return false;
+  } catch (error) {
+    console.error(
+      '[image-validation] Validation failed:',
+      error.message
+    );
+    return false;
+  } finally {
+    if (handle) {
+      await handle.close().catch(() => {});
+    }
+  }
+};
+
+
+
 const classifyUploadedImage = async (imagePath) => {
   try {
     return await imageClassifier.classifyImage(imagePath);
@@ -43,13 +118,22 @@ const createComplaint = async (req, res) => {
 
     // A complaint needs something to classify: a description, a photo, or both.
     if (!description && !hasImage) {
+      removeUploadedFile(req.file);
       return res.status(400).json({ message: 'Please describe the issue or attach a photo' });
+    }
+
+    // Check the actual file signature; the multipart MIME type is supplied by
+    // the client and is not trustworthy on its own.
+    if (hasImage && !(await hasValidImageSignature(req.file))) {
+      removeUploadedFile(req.file);
+      return res.status(400).json({ message: 'The uploaded file is not a supported image' });
     }
 
     // Optional. multipart/form-data sends it as a JSON string; the validator
     // accepts that and a plain object, and drops any unexpected keys.
     const locationResult = parseComplaintLocation(body.location);
     if (!locationResult.ok) {
+      removeUploadedFile(req.file);
       return res.status(400).json({ message: locationResult.message });
     }
     const { location } = locationResult;
@@ -145,7 +229,9 @@ const createComplaint = async (req, res) => {
 
     return res.status(201).json({ complaint });
   } catch (error) {
-    return res.status(500).json({ message: 'Failed to create complaint', error: error.message });
+    console.error(`[complaints] Create failed: ${error.message}`);
+    removeUploadedFile(req.file);
+    return res.status(500).json({ message: 'Failed to create complaint' });
   }
 };
 
@@ -154,7 +240,7 @@ const getMyComplaints = async (req, res) => {
     const complaints = await Complaint.find({ user: req.user.id }).sort({ createdAt: -1 });
     return res.status(200).json({ complaints });
   } catch (error) {
-    return res.status(500).json({ message: 'Failed to fetch complaints', error: error.message });
+    return res.status(500).json({ message: 'Failed to fetch complaints' });
   }
 };
 
@@ -171,13 +257,13 @@ const getComplaintById = async (req, res) => {
     if (error.name === 'CastError') {
       return res.status(404).json({ message: 'Complaint not found' });
     }
-    return res.status(500).json({ message: 'Failed to fetch complaint', error: error.message });
+    return res.status(500).json({ message: 'Failed to fetch complaint' });
   }
 };
 
 const COMPLAINT_ID_PATTERN = /^[a-f\d]{24}$/i;
 // The names uploadMiddleware generates: <timestamp>-<32 hex chars><extension>.
-const STORED_IMAGE_NAME_PATTERN = /^\d+-[a-f\d]{32}\.(jpg|png|gif|webp)$/;
+const STORED_IMAGE_NAME_PATTERN = /^\d+-[a-f\d]{32}\.(jpg|png|gif)$/;
 
 // Returns the full path of a stored photo, or null if the name is not one the
 // upload middleware could have produced. Anything with a directory part, such
@@ -329,7 +415,7 @@ const confirmIssueType = async (req, res) => {
     if (error.name === 'CastError') {
       return res.status(404).json({ message: 'Complaint not found' });
     }
-    return res.status(500).json({ message: 'Failed to confirm issue type', error: error.message });
+    return res.status(500).json({ message: 'Failed to confirm issue type' });
   }
 };
 
@@ -385,7 +471,7 @@ const getDepartmentComplaints = async (req, res) => {
 
     return res.status(200).json({ complaints });
   } catch (error) {
-    return res.status(500).json({ message: 'Failed to fetch department complaints', error: error.message });
+    return res.status(500).json({ message: 'Failed to fetch department complaints' });
   }
 };
 
@@ -472,7 +558,7 @@ const updateDepartmentComplaintStatus = async (req, res) => {
     if (error.name === 'CastError') {
       return res.status(404).json({ message: 'Complaint not found' });
     }
-    return res.status(500).json({ message: 'Failed to update complaint status', error: error.message });
+    return res.status(500).json({ message: 'Failed to update complaint status' });
   }
 };
 
@@ -561,7 +647,7 @@ const updateDepartmentWorkStatus = async (req, res) => {
     if (error.name === 'CastError') {
       return res.status(404).json({ message: 'Complaint not found' });
     }
-    return res.status(500).json({ message: 'Failed to update work status', error: error.message });
+    return res.status(500).json({ message: 'Failed to update work status' });
   }
 };
 
@@ -575,7 +661,7 @@ const getPendingVerificationComplaints = async (req, res) => {
 
     return res.status(200).json({ complaints });
   } catch (error) {
-    return res.status(500).json({ message: 'Failed to fetch pending verifications', error: error.message });
+    return res.status(500).json({ message: 'Failed to fetch pending verifications' });
   }
 };
 
@@ -590,7 +676,7 @@ const getAllComplaintsForMonitor = async (req, res) => {
 
     return res.status(200).json({ complaints });
   } catch (error) {
-    return res.status(500).json({ message: 'Failed to fetch complaints', error: error.message });
+    return res.status(500).json({ message: 'Failed to fetch complaints' });
   }
 };
 
@@ -655,6 +741,8 @@ const reviewCompletion = async (req, res) => {
             // The department is reworking the complaint, so it is back in progress.
             workStatus: WORK_STATUS.IN_PROGRESS,
             dueAt: calculateReworkDueAt(now),
+            escalationLevel: 0,
+            escalatedAt: null,
             'verification.reviewedAt': now,
             'verification.reviewedBy': actor,
             'verification.rejectionReason': reason,
@@ -704,7 +792,7 @@ const reviewCompletion = async (req, res) => {
     if (error.name === 'CastError') {
       return res.status(404).json({ message: 'Complaint not found' });
     }
-    return res.status(500).json({ message: 'Failed to review complaint', error: error.message });
+    return res.status(500).json({ message: 'Failed to review complaint' });
   }
 };
 

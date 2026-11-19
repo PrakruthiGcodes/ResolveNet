@@ -6,7 +6,7 @@ const getMyNotifications = async (req, res) => {
     const unreadCount = notifications.filter((n) => !n.isRead).length;
     return res.status(200).json({ notifications, unreadCount });
   } catch (error) {
-    return res.status(500).json({ message: 'Failed to fetch notifications', error: error.message });
+    return res.status(500).json({ message: 'Failed to fetch notifications' });
   }
 };
 
@@ -30,7 +30,7 @@ const markNotificationRead = async (req, res) => {
     if (error.name === 'CastError') {
       return res.status(404).json({ message: 'Notification not found' });
     }
-    return res.status(500).json({ message: 'Failed to update notification', error: error.message });
+    return res.status(500).json({ message: 'Failed to update notification' });
   }
 };
 
@@ -42,7 +42,7 @@ const markAllNotificationsRead = async (req, res) => {
     );
     return res.status(200).json({ modifiedCount: result.modifiedCount });
   } catch (error) {
-    return res.status(500).json({ message: 'Failed to update notifications', error: error.message });
+    return res.status(500).json({ message: 'Failed to update notifications' });
   }
 };
 

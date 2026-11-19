@@ -306,8 +306,9 @@ describe('monitor review: approval and rejection', () => {
   });
 
   it('reject returns the complaint to submitted with a rework deadline and keeps history', async () => {
-    mock.method(Complaint, 'findOne', async () => pending());
-    const update = mock.method(Complaint, 'findOneAndUpdate', async (filter, body) => ({ ...pending(), ...body.$set }));
+    const previouslyEscalated = pending({ escalationLevel: 1, escalatedAt: new Date() });
+    mock.method(Complaint, 'findOne', async () => previouslyEscalated);
+    const update = mock.method(Complaint, 'findOneAndUpdate', async (filter, body) => ({ ...previouslyEscalated, ...body.$set }));
 
     const before = Date.now();
     const res = mockRes();
@@ -320,6 +321,8 @@ describe('monitor review: approval and rejection', () => {
     const [filter, body] = update.mock.calls[0].arguments;
     assert.equal(filter.status, STATUS.PENDING_VERIFICATION);
     assert.equal(body.$set.status, STATUS.SUBMITTED);
+    assert.equal(body.$set.escalationLevel, 0, 'a new rework cycle can escalate again');
+    assert.equal(body.$set.escalatedAt, null, 'the previous escalation timestamp is cleared');
     assert.equal(body.$set['verification.rejectionReason'], 'Pothole still open', 'reason is trimmed');
     assert.equal(body.$set['verification.reviewedBy'], monitor.id);
     assert.equal(body.$push.verificationHistory.action, 'rejected');

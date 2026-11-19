@@ -59,7 +59,7 @@ export function ReportComplaintPage() {
     }
 
     if (!ACCEPTED_IMAGE_TYPES.includes(file.type)) {
-      setFieldError('Please choose a JPEG, PNG, GIF, or WEBP image.');
+      setFieldError('Please choose a JPEG, PNG, or GIF image.');
       event.target.value = '';
       return;
     }
@@ -268,7 +268,7 @@ export function ReportComplaintPage() {
             ) : (
               <label className="rn-report-form__upload" htmlFor="report-image-input">
                 <span>Click to attach a photo</span>
-                <span className="rn-report-form__upload-hint">JPEG, PNG, GIF, or WEBP · up to {MAX_IMAGE_SIZE_MB}MB</span>
+                <span className="rn-report-form__upload-hint">JPEG, PNG, or GIF · up to {MAX_IMAGE_SIZE_MB}MB</span>
               </label>
             )}
             <input

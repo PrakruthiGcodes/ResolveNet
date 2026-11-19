@@ -47,7 +47,7 @@ Civic problems are often reported informally, with no way for the citizen to see
 
 **Citizen**
 - Register and sign in.
-- Report an issue with a description, an optional photo (JPEG, PNG, GIF, or WEBP, up to 5 MB), and an optional location.
+- Report an issue with a description, an optional photo (JPEG, PNG, or GIF, up to 5 MB), and an optional location.
 - Confirm or correct the issue type when the system is not sure (see [AI image classification](#ai-image-classification)).
 - View "My Complaints" and each complaint's status, deadline, escalation, and history.
 - Receive notifications about submission, work starting, escalation, rejection, and resolution.
@@ -218,6 +218,7 @@ Real values go in `backend/.env` and `frontend/.env`. Both files are git-ignored
 | `MONGO_URI` | Yes | `mongodb://127.0.0.1:27017/<your-database-name>` | MongoDB connection string. Use your own database name. |
 | `JWT_SECRET` | Yes | `<a-long-random-string>` | Secret used to sign login tokens. Use a long random value, for example from `node -e "console.log(require('crypto').randomBytes(48).toString('hex'))"`. Never share it. |
 | `JWT_EXPIRES_IN` | No (defaults to `7d`) | `7d` | How long a login token stays valid |
+| `DNS_SERVERS` | No | `8.8.8.8,1.1.1.1` | Optional comma-separated DNS resolver override; leave unset unless your network cannot resolve MongoDB SRV records |
 | `CLIENT_URL` | Yes | `http://localhost:5173` | Allowed browser origin(s), comma-separated. Local addresses on any port are also accepted outside production. |
 
 **Frontend (`frontend/.env`)**
@@ -368,7 +369,7 @@ The pages and components have no automated tests. Their behaviour has been check
 | Item | Value |
 | --- | --- |
 | Model files | `ai-engine/model/teachable_machine/model.json`, `weights.bin`, `metadata.json` |
-| Accepted uploads | JPEG, PNG, GIF, WEBP, up to 5 MB |
+| Accepted uploads | JPEG, PNG, GIF, up to 5 MB |
 | Preprocessing | Resized (stretched, not cropped) to 224 × 224 pixels; RGB values scaled to the range −1 to 1 |
 | Output | One probability per class |
 
